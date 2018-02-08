@@ -4,11 +4,6 @@ import React, { Component } from 'react';
 class Header extends Component{
   constructor(props){
     super(props);
-    this.state = {
-      text: '',
-      list: [],
-      removed: []
-    };
   }
   changeInput(input){
     this.setState({
@@ -33,19 +28,33 @@ class Header extends Component{
     this.setState({list: list, removed: removed});
     console.log(this.state);
   }
+  changePage(){
+    if(this.state.page !== 'removed'){
+      this.setState({page: 'removed',button: 'Main Menu'});
+      document.getElementById('araba').innerHTML =  this.showList(this.state.removed);
+    }
+    else{
+      this.setState({page: 'list',button: 'Trash Box'});
+      document.getElementById('araba').innerHTML = this.showList(this.state.list);
+    }
+
+  }
+  showList(page){
+    return(
+        `<div>
+          <li> ANANAS </li>
+          <input type='button' value='X' onClick={() => this.removeItem(page)}/>
+        </div>`
+   );
+  }
   render(){
     return(
       <div>
         <span> To Do List </span> <br />
         <input id='input' placeholder='To Do' onChange={(e) => (this.changeInput(e.target.value))}/>
         <input type='button' value='+' onClick={() => this.addItem(this.state.text)}/>
-        <input type='button' value={this.props.page} />
-        {this.state.list.map((item) => 
-          <div>
-          <li> {item} </li>
-          <input type='button' value='X' onClick={() => this.removeItem(item)}/>
-          </div>
-          )}
+        <input type='button' value={this.state.button} onClick={() => this.changePage()}/>
+        <Input />
       </div>
     )
   }
