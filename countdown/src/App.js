@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
-import allDice from './img/all.png';
-import './App.css';
+// import Main from './Main';
+import Header from './Header';
+// import './App.css';
 
-class Welcome extends Component{
+class App extends Component{
+	constructor(props){
+		super(props);
+	}
 	render(){
-		return;
+		return (
+			<div>
+				<Header />
+			</div>
+		);
 	}
 }
-export default Welcome;
+
+export default App;
